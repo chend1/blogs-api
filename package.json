@@ -1,0 +1,20 @@
+{
+  "name": "blogs-api",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/chend1/blogs-api.git",
+  "author": "chendong <chend97>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon main.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-jwt": "^8.4.1",
+    "jsonwebtoken": "^9.0.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

@@ -24,8 +24,19 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return res.status(200).end()
   }
+  req.send_res = (err, data, code = 200, status = 1) => {
+    return {
+      code,
+      status,
+      message: err || err.message,
+      data,
+    }
+  }
   next()
 })
+// 开启token验证
+const { useToken } = require('./utils/token')
+app.use(useToken)
 
 // 路由导入
 const { loginRouter, userRouter, menuRouter, roleRouter } = require('./router')
@@ -37,6 +48,10 @@ app.use('/api', roleRouter)
 // 捕获错误
 app.use((err, req, res, next) => {
   console.log(err)
+  res.send({
+    code: 1,
+    msg: err.message
+  })
 })
 
 app.listen(port, () => {

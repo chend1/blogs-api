@@ -24,13 +24,13 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return res.status(200).end()
   }
-  req.send_res = (err, data, code = 200, status = 1) => {
-    return {
+  res.send_res = (data, message, code = 200, status = 1) => {
+    res.send({
       code,
       status,
-      message: err || err.message,
+      message,
       data,
-    }
+    })
   }
   next()
 })
@@ -50,7 +50,7 @@ app.use((err, req, res, next) => {
   console.log(err)
   res.send({
     code: 1,
-    msg: err.message
+    msg: err.message,
   })
 })
 

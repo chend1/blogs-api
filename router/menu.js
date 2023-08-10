@@ -12,7 +12,7 @@ router.post('/add/menu', (req, res) => {
 })
 
 // 修改菜单
-router.post('/deit/menu', (req, res) => {
+router.post('/edit/menu', (req, res) => {
   res.send('/deit/menu ok')
 })
 

@@ -84,14 +84,17 @@ const deleteRole = (req, res) => {
   })
 }
 // 授权
-const grantRole = (req, res) => {
+const authRole = (req, res) => {
   const body = req.body
   const sql = 'UPDATE role SET ? WHERE id = ?'
   db.query(
     sql,
-    {
-      auth_list: body.auth_list,
-    },
+    [
+      {
+        auth_list: body.auth_list,
+      },
+      body.id,
+    ],
     (err, result) => {
       if (err) throw err
       res.send_res({}, '授权成功')
@@ -104,5 +107,5 @@ module.exports = {
   addRole,
   editRole,
   deleteRole,
-  grantRole
+  authRole,
 }

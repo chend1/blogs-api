@@ -1,24 +1,46 @@
 const express = require('express')
 const router = express.Router()
+const expressJoi = require('@escook/express-joi')
+const {
+  menuSchema,
+  editMenuSchema,
+  deleteMenuSchema,
+} = require('../router_schema/menu')
 
+const {
+  getMenuList,
+  addMenu,
+  editMenu,
+  deleteMenu,
+} = require('../router_handle/menu')
 // 菜单列表
-router.get('/menu/list', (req, res) => {
-  res.send('/menu/list ok')
-})
+router.get('/menu/list', getMenuList)
 
 // 新增菜单
-router.post('/add/menu', (req, res) => {
-  res.send('/add/menu ok')
-})
+router.post(
+  '/menu/add',
+  expressJoi({
+    body: menuSchema,
+  }),
+  addMenu
+)
 
 // 修改菜单
-router.post('/edit/menu', (req, res) => {
-  res.send('/deit/menu ok')
-})
+router.post(
+  '/menu/edit',
+  expressJoi({
+    body: editMenuSchema,
+  }),
+  editMenu
+)
 
 // 删除菜单
-router.post('/delete/menu', (req, res) => {
-  res.send('/delete/menu ok')
-})
+router.post(
+  '/menu/delete',
+  expressJoi({
+    body: deleteMenuSchema,
+  }),
+  deleteMenu
+)
 
 module.exports = router

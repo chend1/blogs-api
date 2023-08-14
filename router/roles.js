@@ -1,24 +1,56 @@
 const express = require('express')
 const router = express.Router()
 const expressJoi = require('@escook/express-joi')
-const { getRoleList } = require('../router_handle/role')
-const { roleSchema } = require('../router_schema/role')
+const {
+  getRoleList,
+  addRole,
+  editRole,
+  deleteRole,
+  authRole,
+} = require('../router_handle/role')
+const {
+  roleSchema,
+  editRoleSchema,
+  deleteRoleSchema,
+  grantRoleSchema,
+} = require('../router_schema/role')
 // 角色列表
 router.get('/role/list', getRoleList)
 
 // 新增角色
-router.post('/add/role', (req, res) => {
-  res.send('/add/menu ok')
-})
+router.post(
+  '/role/add',
+  expressJoi({
+    body: roleSchema,
+  }),
+  addRole
+)
 
 // 修改角色
-router.post('/edit/role', (req, res) => {
-  res.send('/deit/role ok')
-})
+router.post(
+  '/role/edit',
+  expressJoi({
+    body: editRoleSchema,
+  }),
+  editRole
+)
 
 // 删除角色
-router.post('/delete/role', (req, res) => {
-  res.send('/delete/menu ok')
-})
+router.post(
+  '/role/delete',
+  expressJoi({
+    body: deleteRoleSchema,
+  }),
+  deleteRole
+)
+
+// 授权角色
+router.post(
+  '/role/auth',
+  expressJoi({
+    body: grantRoleSchema,
+  }),
+  authRole
+)
 
 module.exports = router

@@ -47,6 +47,11 @@ app.use('/api', roleRouter)
 
 // 捕获错误
 app.use((err, req, res, next) => {
+  const message = err.message
+  if(message === 'jwt expired'){
+    res.send_res({}, 'token过期，请重新登录', 401, 0)
+    return
+  }
   console.log(err)
   res.send({
     code: 1,

@@ -7,13 +7,17 @@ const {
   editUser,
   deleteUser,
 } = require('../router_handle/user')
-const { userSchema, deleteUserSchema } = require('../router_schema/user')
+const {
+  userSchema,
+  userEditSchema,
+  deleteUserSchema,
+} = require('../router_schema/user')
 // 用户列表
 router.get('/user/list', getUserList)
 
 // 新增用户
 router.post(
-  '/add/user',
+  '/user/add',
   expressJoi({
     body: userSchema,
   }),
@@ -22,16 +26,16 @@ router.post(
 
 // 修改用户
 router.post(
-  '/edit/user',
+  '/user/edit',
   expressJoi({
-    body: userSchema,
+    body: userEditSchema,
   }),
   editUser
 )
 
 // 删除用户
 router.post(
-  '/delete/user',
+  '/user/delete',
   expressJoi({
     body: deleteUserSchema,
   }),

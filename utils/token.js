@@ -11,7 +11,7 @@ const setToken = (value, time) => {
 const useToken = expressjwt({
   secret: SECRET_KEY,
   algorithms: ['HS256'],
-}).unless({ path: [/^\/api\/login$/, '/', /^\/public\//] })
+}).unless({ path: [/^\/api\/login$/, '/', /^\/static\//] })
 
 const removeToken = () => {
   setToken(null)

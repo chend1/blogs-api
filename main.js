@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 3000
-
+const path = require('path')
 // 参数解析
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // 开放静态资源
-app.use(express.static('static'))
+app.use('/static',express.static(path.join(__dirname, 'static')))
 
 // 解决跨域
 app.use((req, res, next) => {
@@ -39,11 +39,11 @@ const { useToken } = require('./utils/token')
 app.use(useToken)
 
 // 路由导入
-const { loginRouter, userRouter, menuRouter, roleRouter } = require('./router')
-app.use('/api', loginRouter)
-app.use('/api', userRouter)
-app.use('/api', menuRouter)
-app.use('/api', roleRouter)
+const routers = require('./router')
+// 路由注册
+Object.keys(routers).forEach(key => {
+  app.use('/api', routers[key])
+})
 
 // 捕获错误
 app.use((err, req, res, next) => {

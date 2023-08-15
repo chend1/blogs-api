@@ -18,8 +18,8 @@ const deleteRoleSchema = {
 }
 
 const grantRoleSchema = {
-  role_id: Joi.number().required(),
-  auth_List: Joi.string().required(),
+  id: Joi.number().required(),
+  auth_list: Joi.string().required(),
 }
 
 module.exports = {

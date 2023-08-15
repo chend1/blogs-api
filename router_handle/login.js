@@ -15,7 +15,7 @@ const getUserInfo = (req, res) => {
     db.query(roleSql, { id: role_id }, (err, info) => {
       if (err) throw err
       if(info.length === 0) return res.send_res({}, '角色不存在', 400, 0)
-      const menu = info[0].auth_list.split(',')
+      const menu = info[0].auth_list ? info[0].auth_list.split(',') : []
       const menuSql = 'select * from menu'
       db.query(menuSql, (err, menuInfo) => {
         const menuList = menu.map(item => {

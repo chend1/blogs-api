@@ -5,7 +5,7 @@ const getUserList = (req, res) => {
   const limit = parseInt(req.query.size) || 10
   const keyword = req.query.keyword
   // 构建查询语句
-  const sql = `SELECT * FROM user WHERE name LIKE '%${keyword}%' LIMIT ${
+  const sql = `SELECT *,DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS create_time  FROM user WHERE name LIKE '%${keyword}%' LIMIT ${
     (page - 1) * limit
   },${limit};`
   db.query(sql, (err, results) => {

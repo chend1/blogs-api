@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const db = require('../db/index')
 // formData处理中间件
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -11,16 +11,34 @@ const storage = multer.diskStorage({
     const fileName = file.originalname
     const fileExtension = fileName.split('.').pop()
     const name = fileName.replace(`.${fileExtension}`, '')
-    cb(null, name + Date.now() + '-.' + fileExtension) // 使用时间戳和原始文件名作为文件名
+    const suffix = file.mimetype.split('/')[1]
+    cb(null, name + Date.now() + '.' + suffix) // 使用时间戳和原始文件名作为文件名
   },
 })
 const upload = multer({ storage: storage })
 // 文件上传
 router.post('/upload', upload.single('file'), (req, res) => {
-  res.send_res({
-    url: 'http://localhost:3000/' + req.file.path,
-    path: req.file.path,
-  }, '上传成功')
+  console.log(req.file);
+  const sql = 'INSERT INTO file_list SET ?'
+  const { timestampChange } = require('../utils/index')
+  db.query(
+    sql,
+    {
+      url: 'http://localhost:3000/' + req.file.destination + '/' + req.file.filename,
+      name: req.file.filename,
+      path: req.file.path,
+      type: req.file.mimetype.split('/')[1],
+      create_time: timestampChange(new Date()),
+    },
+    (err, result) => {
+      if (err) throw err
+      res.send_res({
+        url: 'http://localhost:3000/' + req.file.destination + '/' + req.file.filename,
+        path: req.file.path,
+      }, '上传成功')
+    }
+  )
+  
 })
 
 module.exports = router

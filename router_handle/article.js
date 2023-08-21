@@ -133,7 +133,7 @@ const deleteArticle = (req, res) => {
 
 const getArticleInfo = (req, res) => {
   const id = req.query.id
-  const sql = `SELECT * FROM article_info WHERE article_id = ${id};`
+  const sql = `SELECT *,DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS create_time FROM article_info WHERE article_id = ${id};`
   db.query(sql, (err, info) => {
     if (err) throw err
     const listSql = `SELECT * FROM article WHERE id = ${id};`

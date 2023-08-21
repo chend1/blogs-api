@@ -4,7 +4,7 @@ function modifyMenuList(data, key = 'parent_id') {
   const children = [];
   const dataList = JSON.parse(JSON.stringify(data));
   dataList.forEach((item) => {
-    if (item[key] === 0) {
+    if (item[key] === 0 || item[key] === null) {
       item.children = [];
       list.push(item);
     } else {

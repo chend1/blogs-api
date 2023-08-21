@@ -1,7 +1,7 @@
 const db = require('../db/index')
 const getMenuList = (req, res) => {
   // 构建查询语句
-  const sql = `SELECT * FROM Menu`
+  const sql = `SELECT * FROM menu`
   db.query(sql, (err, results) => {
     if (err) throw err
     const { modifyMenuList } = require('../utils/index')

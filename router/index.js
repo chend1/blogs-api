@@ -8,6 +8,7 @@ const classRouter = require('./article_class')
 const articleRouter = require('./article')
 const tagsRouter = require('./tags')
 const commentRouter = require('./comment')
+const linkRouter = require('./link')
 
 module.exports = {
   loginRouter,
@@ -19,4 +20,5 @@ module.exports = {
   classRouter,
   tagsRouter,
   commentRouter,
+  linkRouter
 }

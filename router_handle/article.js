@@ -41,6 +41,7 @@ const addArticle = (req, res) => {
       keyword: body.keyword,
       thumbnail: body.thumbnail,
       type: body.type,
+      user_id: body.user_id,
       create_time: timestampChange(new Date()),
     },
     (err, result) => {
@@ -77,7 +78,7 @@ const addArticle = (req, res) => {
 
 const editArticle = (req, res) => {
   const body = req.body
-  console.log(body)
+  // console.log(body)
   const sql = 'UPDATE article SET ? WHERE id = ?'
   db.query(
     sql,
@@ -90,14 +91,15 @@ const editArticle = (req, res) => {
         author: body.author,
         keyword: body.keyword,
         thumbnail: body.thumbnail,
+        user_id: body.user_id,
         type: body.type,
       },
-      body.id,
+      body.article_id,
     ],
     (err, result) => {
       if (err) throw err
       if (body.content) {
-        const infoSql = `UPDATE article_info SET ? WHERE article_id = ?`
+        const infoSql = `UPDATE article_info SET ? WHERE id = ?`
         db.query(
           infoSql,
           [

@@ -20,6 +20,7 @@ const addArticleSchema = {
   type: Joi.number().required().error(new Error('文章类型不能为空')),
   author: Joi.string().required().error(new Error('作者不能为空')),
   keyword: Joi.string().allow(null, ''),
+  user_id: Joi.number().required().error(new Error('用户id不能为空')),
 }
 
 
@@ -34,6 +35,8 @@ const editArticleSchema = {
   author: Joi.string().required().error(new Error('作者不能为空')),
   keyword: Joi.string().allow(null, ''),
   id: Joi.number().required().error(new Error('id不能为空')),
+  user_id: Joi.number().required().error(new Error('用户id不能为空')),
+  article_id: Joi.number().required().error(new Error('文章id不能为空')),
 }
 
 const deleteArticleSchema = {

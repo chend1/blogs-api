@@ -6,14 +6,14 @@ const {
   addCommentSchema,
   editCommentSchema,
   deleteCommentSchema
-} = require('../router_schema/comment')
+} = require('./schema')
 
 const {
   getCommentList,
   addComment,
   editComment,
   deleteComment,
-} = require('../router_handle/comment')
+} = require('./handle')
 // 评论列表
 router.get('/comment/list', (req, res, next) => {
   // 执行校验

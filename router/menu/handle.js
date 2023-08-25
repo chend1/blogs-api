@@ -1,10 +1,10 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const getMenuList = (req, res) => {
   // 构建查询语句
   const sql = `SELECT * FROM menu`
   db.query(sql, (err, results) => {
     if (err) throw err
-    const { modifyMenuList } = require('../utils/index')
+    const { modifyMenuList } = require('../../utils/index')
     res.send_res(
       {
         list: modifyMenuList(results),
@@ -18,7 +18,7 @@ const addMenu = (req, res) => {
   const body = req.body
   // 添加新用户到数据库
   const sql = 'INSERT INTO menu SET ?'
-  const { timestampChange } = require('../utils/index')
+  const { timestampChange } = require('../../utils/index')
   db.query(
     sql,
     {

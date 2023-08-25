@@ -6,12 +6,12 @@ const {
   addUser,
   editUser,
   deleteUser,
-} = require('../router_handle/user')
+} = require('./handle')
 const {
   userSchema,
   userEditSchema,
   deleteUserSchema,
-} = require('../router_schema/user')
+} = require('./schema')
 // 用户列表
 router.get('/user/list', getUserList)
 

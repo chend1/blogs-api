@@ -5,14 +5,14 @@ const {
   menuSchema,
   editMenuSchema,
   deleteMenuSchema,
-} = require('../router_schema/menu')
+} = require('./schema')
 
 const {
   getMenuList,
   addMenu,
   editMenu,
   deleteMenu,
-} = require('../router_handle/menu')
+} = require('./handle')
 // 菜单列表
 router.get('/menu/list', getMenuList)
 

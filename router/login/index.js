@@ -5,8 +5,8 @@ const {
   getUserInfo,
   handlerLogin,
   handlerRegister,
-} = require('../router_handle/login')
-const { loginSchema, registerSchema } = require('../router_schema/login')
+} = require('./handle')
+const { loginSchema, registerSchema } = require('./schema')
 
 // 获取登录详情
 router.get('/login/info', getUserInfo)

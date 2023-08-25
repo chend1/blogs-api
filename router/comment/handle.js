@@ -1,11 +1,11 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const getCommentList = (req, res) => {
   // 构建查询语句
   const condition = req.query.id ? `article_id = ${req.query.id}` : `user_id = ${req.query.user_id}`
   const sql = `SELECT *,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time FROM comment WHERE ${condition};`
   db.query(sql, (err, results) => {
     if (err) throw err
-    const { modifyMenuList } = require('../utils/index')
+    const { modifyMenuList } = require('../../utils/index')
     res.send_res(
       {
         list: modifyMenuList(results),
@@ -18,7 +18,7 @@ const getCommentList = (req, res) => {
 const addComment = (req, res) => {
   const body = req.body
   const sql = 'INSERT INTO comment SET ?'
-  const { timestampChange } = require('../utils/index')
+  const { timestampChange } = require('../../utils/index')
   db.query(
     sql,
     {

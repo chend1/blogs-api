@@ -5,14 +5,14 @@ const {
   linkSchema,
   editLinkSchema,
   deleteLinkSchema
-} = require('../router_schema/link')
+} = require('./schema')
 
 const {
   getLinkList,
   addLink,
   editLink,
   deleteLink,
-} = require('../router_handle/link')
+} = require('./handle')
 // 标签列表
 router.get('/link/list', getLinkList)
 

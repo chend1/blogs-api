@@ -1,4 +1,4 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const bcrypt = require('bcryptjs')
 const getUserList = (req, res) => {
   const page = parseInt(req.query.page) || 1
@@ -38,7 +38,7 @@ const addUser = (req, res) => {
     // 添加新用户到数据库
     const sql = 'INSERT INTO user SET ?'
     const password = bcrypt.hashSync(body.password || '123456')
-    const { timestampChange } = require('../utils/index')
+    const { timestampChange } = require('../../utils/index')
     console.log(body)
     db.query(
       sql,

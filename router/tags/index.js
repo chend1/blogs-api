@@ -5,14 +5,14 @@ const {
   tagSchema,
   editTagSchema,
   deleteTagSchema
-} = require('../router_schema/tags')
+} = require('./schema')
 
 const {
   getTagsList,
   addTags,
   editTags,
   deleteTags,
-} = require('../router_handle/tags')
+} = require('./handle')
 // 标签列表
 router.get('/tags/list', getTagsList)
 

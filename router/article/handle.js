@@ -1,4 +1,4 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const getArticleList = (req, res) => {
   const page = parseInt(req.query.page) || 1
   const limit = parseInt(req.query.size) || 10
@@ -29,7 +29,7 @@ const addArticle = (req, res) => {
   const body = req.body
   // 添加文章
   const sql = 'INSERT INTO article SET ?'
-  const { timestampChange } = require('../utils/index')
+  const { timestampChange } = require('../../utils/index')
   db.query(
     sql,
     {

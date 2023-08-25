@@ -1,6 +1,6 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const bcrypt = require('bcryptjs')
-const { setToken } = require('../utils/token')
+const { setToken } = require('../../utils/token')
 
 const getUserInfo = (req, res) => {
   if (!req.auth) {
@@ -22,7 +22,7 @@ const getUserInfo = (req, res) => {
           const option = menuInfo.find(item2 => item2.id == item)
           return option
         })
-        const { modifyMenuList } = require('../utils/index')
+        const { modifyMenuList } = require('../../utils/index')
         if (err) throw err
         res.send_res(
           {
@@ -75,7 +75,7 @@ const handlerRegister = (req, res) => {
     // 添加新用户到数据库
     const sql = 'insert into user set ?'
     const password = bcrypt.hashSync(body.password)
-    const { timestampChange } = require('../utils/index')
+    const { timestampChange } = require('../../utils/index')
     db.query(
       sql,
       {

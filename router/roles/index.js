@@ -7,13 +7,13 @@ const {
   editRole,
   deleteRole,
   authRole,
-} = require('../router_handle/role')
+} = require('./handle')
 const {
   roleSchema,
   editRoleSchema,
   deleteRoleSchema,
   grantRoleSchema,
-} = require('../router_schema/role')
+} = require('./schema')
 // 角色列表
 router.get('/role/list', getRoleList)
 

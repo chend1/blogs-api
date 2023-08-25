@@ -5,14 +5,14 @@ const {
   articleClassSchema,
   editAarticleClassSchema,
   deleteAarticleClassSchema
-} = require('../router_schema/article_class')
+} = require('./schema')
 
 const {
   getArticleClassList,
   addArticleClass,
   editArticleClass,
   deleteArticleClass,
-} = require('../router_handle/article_class')
+} = require('./handle')
 // 分类列表
 router.get('/class/list', getArticleClassList)
 

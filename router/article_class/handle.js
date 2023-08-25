@@ -1,10 +1,10 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const getArticleClassList = (req, res) => {
   // 构建查询语句
   const sql = `SELECT *,DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS create_time FROM classification ORDER BY sort`
   db.query(sql, (err, results) => {
     if (err) throw err
-    const { modifyMenuList } = require('../utils/index')
+    const { modifyMenuList } = require('../../utils/index')
     res.send_res(
       {
         list: modifyMenuList(results),
@@ -18,7 +18,7 @@ const addArticleClass = (req, res) => {
   const body = req.body
   // 添加分类
   const sql = 'INSERT INTO classification SET ?'
-  const { timestampChange } = require('../utils/index')
+  const { timestampChange } = require('../../utils/index')
   db.query(
     sql,
     {

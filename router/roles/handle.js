@@ -1,4 +1,4 @@
-const db = require('../db/index')
+const db = require('../../db/index')
 const getRoleList = (req, res) => {
   const page = parseInt(req.query.page) || 1
   const limit = parseInt(req.query.size) || 10
@@ -37,7 +37,7 @@ const addRole = (req, res) => {
     }
     // 添加新角色到数据库
     const sql = 'INSERT INTO role SET ?'
-    const { timestampChange } = require('../utils/index')
+    const { timestampChange } = require('../../utils/index')
     db.query(
       sql,
       {

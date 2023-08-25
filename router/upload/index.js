@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../db/index')
+const db = require('../../db/index')
 // formData处理中间件
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -20,7 +20,7 @@ const upload = multer({ storage: storage })
 router.post('/upload', upload.single('file'), (req, res) => {
   console.log(req.file);
   const sql = 'INSERT INTO file_list SET ?'
-  const { timestampChange } = require('../utils/index')
+  const { timestampChange } = require('../../utils/index')
   db.query(
     sql,
     {

@@ -8,7 +8,7 @@ const {
   deleteArticleSchema,
   articleInfoSchema,
   issueArticleSchema
-} = require('../router_schema/article')
+} = require('./schema')
 
 const {
   getArticleList,
@@ -17,7 +17,7 @@ const {
   deleteArticle,
   issueArticle,
   getArticleInfo,
-} = require('../router_handle/article')
+} = require('./handle')
 // 文章列表
 router.get(
   '/article/list',

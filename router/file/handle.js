@@ -1,4 +1,5 @@
 const db = require('../../db/index')
+const fs = require('fs')
 const getFileList = (req, res) => {
   const page = parseInt(req.query.page) || 1
   const limit = parseInt(req.query.size) || 10
@@ -46,6 +47,7 @@ const deleteFile = (req, res) => {
   const sql = 'DELETE FROM file_list WHERE id = ?'
   db.query(sql, body.id, (err, result) => {
     if (err) throw err
+    fs.unlinkSync(body.path)
     res.send_res({}, '删除成功')
   })
 }

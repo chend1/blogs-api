@@ -7,7 +7,7 @@ const getTagsList = (req, res) => {
   if (page) {
     const sql = `SELECT *,DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS create_time FROM tags WHERE name LIKE '%${
       keyword || ''
-    }%' LIMIT ${(page - 1) * limit},${limit};`
+    }%'  ORDER BY sort LIMIT ${(page - 1) * limit},${limit};`
     db.query(sql, (err, results) => {
       if (err) throw err
       const totalSql = `SELECT COUNT(*) AS total FROM tags WHERE name LIKE '%${keyword}%'`

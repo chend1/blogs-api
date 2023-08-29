@@ -9,6 +9,7 @@ const articleRouter = require('./article')
 const tagsRouter = require('./tags')
 const commentRouter = require('./comment')
 const linkRouter = require('./link')
+const fileRouter = require('./file')
 
 module.exports = {
   loginRouter,
@@ -20,5 +21,6 @@ module.exports = {
   classRouter,
   tagsRouter,
   commentRouter,
-  linkRouter
+  linkRouter,
+  fileRouter
 }

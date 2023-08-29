@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../../db/index')
+
 // formData处理中间件
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -8,17 +9,19 @@ const storage = multer.diskStorage({
     cb(null, 'static/uploads') // 将文件保存在 uploads 目录中
   },
   filename: function (req, file, cb) {
-    const fileName = file.originalname
+    // console.log(req.body.name);
+    const fileName = req.body.name || file.originalname
     const fileExtension = fileName.split('.').pop()
     const name = fileName.replace(`.${fileExtension}`, '')
     const suffix = file.mimetype.split('/')[1]
-    cb(null, name + Date.now() + '.' + suffix) // 使用时间戳和原始文件名作为文件名
+    const { timestampChange } = require('../../utils/index')
+    cb(null, name + '_' + timestampChange(new Date(), 'YYYYMMDDHHmmss') + '.' + suffix) // 使用时间戳和原始文件名作为文件名
   },
 })
 const upload = multer({ storage: storage })
 // 文件上传
 router.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.file);
+  // console.log(req.file, req.body.name);
   const sql = 'INSERT INTO file_list SET ?'
   const { timestampChange } = require('../../utils/index')
   db.query(

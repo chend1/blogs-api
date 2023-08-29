@@ -7,10 +7,10 @@ const getLinkList = (req, res) => {
   if (page) {
     const sql = `SELECT *,DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS create_time FROM friend_link WHERE title LIKE '%${
       keyword || ''
-    }%' LIMIT ${(page - 1) * limit},${limit};`
+    }%' OR link LIKE '%${keyword || ''}%' LIMIT ${(page - 1) * limit},${limit};`
     db.query(sql, (err, results) => {
       if (err) throw err
-      const totalSql = `SELECT COUNT(*) AS total FROM friend_link WHERE title LIKE '%${keyword}%'`
+      const totalSql = `SELECT COUNT(*) AS total FROM friend_link WHERE title LIKE '%${keyword}%' OR link LIKE '%${keyword || ''}%'`
       db.query(totalSql, (err, info) => {
         if (err) throw err
         res.send_res(

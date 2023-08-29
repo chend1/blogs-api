@@ -39,7 +39,7 @@ const addMenu = (req, res) => {
 
 const editMenu = (req, res) => {
   const body = req.body
-  console.log(body)
+  // console.log(body)
   const sql = 'UPDATE menu SET ? WHERE id = ?'
   db.query(
     sql,

@@ -29,8 +29,22 @@ const deleteUserSchema = {
   id: Joi.number().required().error(new Error('id不能为空')),
 }
 
+const infoSchema = {
+  name: Joi.string().required().error(new Error('姓名不能为空')),
+  email: Joi.string().allow(null, ''),
+  phone: Joi.number().allow(null, ''),
+  avatar: Joi.string().allow(null, ''),
+}
+
+const passwordSchema = {
+  old_password: Joi.string().required().error(new Error('原密码不能为空')),
+  password: Joi.string().required().error(new Error('新密码不能为空')),
+  repeat_password: Joi.ref('password'),
+}
 module.exports = {
   userSchema,
   deleteUserSchema,
-  userEditSchema
+  userEditSchema,
+  infoSchema,
+  passwordSchema
 }

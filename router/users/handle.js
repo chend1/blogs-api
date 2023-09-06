@@ -39,7 +39,7 @@ const addUser = (req, res) => {
     const sql = 'INSERT INTO user SET ?'
     const password = bcrypt.hashSync(body.password || '123456')
     const { timestampChange } = require('../../utils/index')
-    console.log(body)
+    // console.log(body)
     db.query(
       sql,
       {
@@ -93,9 +93,70 @@ const deleteUser = (req, res) => {
   })
 }
 
+const resetUserPassword = (req, res) => {
+  const body = req.body
+  const password = bcrypt.hashSync('123456')
+  const sql = 'UPDATE user SET password = ? WHERE id = ?'
+  db.query(sql, [password, body.id], (err, result) => {
+    if (err) throw err
+    res.send_res({}, '重置成功')
+  })
+}
+// 修改用户信息
+const editUserInfo = (req, res) => {
+  if (!req.auth) {
+    return res.send_res({}, '账号不存在', 400, 0)
+  }
+  const { id } = req.auth
+  const sql = 'UPDATE user SET ? WHERE id = ?'
+  const body = req.body
+  db.query(
+    sql,
+    [
+      {
+        name: body.name,
+        email: body.email,
+        phone: body.phone,
+        avatar: body.avatar,
+      },
+      id,
+    ],
+    (err, result) => {
+      if (err) throw err
+      res.send_res({}, '修改成功')
+    }
+  )
+}
+// 修改密码
+const updatePassword = (req, res) => {
+  if (!req.auth) {
+    return res.send_res({}, '账号不存在', 400, 0)
+  }
+  const { id } = req.auth
+  const body = req.body
+  const sql = 'select * from user where ?'
+  db.query(sql, { id }, (err, result) => {
+    if (err) throw err
+    // 对比密码是否正确
+    if (!bcrypt.compareSync(body.old_password, result[0].password)) {
+      res.send_res({}, '原密码错误', 400, 0)
+      return
+    }
+    const password = bcrypt.hashSync(body.password)
+    const passwordSql = 'UPDATE user SET password = ? WHERE id = ?'
+    db.query(passwordSql, [password, id], (err, result) => {
+      if (err) throw err
+      res.send_res({}, '修改成功')
+    })
+  })
+}
+
 module.exports = {
   getUserList,
   addUser,
   editUser,
   deleteUser,
+  resetUserPassword,
+  editUserInfo,
+  updatePassword
 }

@@ -54,7 +54,7 @@ app.use((err, req, res, next) => {
   }
   console.log(err)
   res.send({
-    code: 1,
+    code: 400,
     message: err.message,
   })
 })

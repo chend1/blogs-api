@@ -1,33 +1,20 @@
 const express = require('express')
 const router = express.Router()
 const expressJoi = require('@escook/express-joi')
-router.get('/web/info', getUserList)
 
-// 新增网站信息
-router.post(
-  '/web/add',
-  expressJoi({
-    body: userSchema,
-  }),
-  addUser
-)
+const { webSchema } = require('./schema')
+
+const { getWebInfo, editWebInfo } = require('./handle')
+// 获取网站信息
+router.get('/web/info', getWebInfo)
 
 // 修改网站信息
 router.post(
-  '/web/edit',
+  '/web/info/edit',
   expressJoi({
-    body: userEditSchema,
+    body: webSchema,
   }),
-  editUser
-)
-
-// 删除网站信息
-router.post(
-  '/web/delete',
-  expressJoi({
-    body: deleteUserSchema,
-  }),
-  deleteUser
+  editWebInfo
 )
 
 module.exports = router

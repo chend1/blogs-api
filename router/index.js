@@ -12,6 +12,8 @@ const linkRouter = require('./link')
 const fileRouter = require('./file')
 const webInfoRouter = require('./webInfo')
 const visitorRouter = require('./visitors')
+const consultRouter = require('./consult')
+const dataRouter = require('./data')
 
 module.exports = {
   loginRouter,
@@ -26,5 +28,7 @@ module.exports = {
   linkRouter,
   fileRouter,
   webInfoRouter,
-  visitorRouter
+  visitorRouter,
+  consultRouter,
+  dataRouter
 }

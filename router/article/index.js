@@ -19,6 +19,35 @@ const {
   getArticleInfo,
 } = require('./handle')
 // 文章列表
+/**
+ * 
+ * @api {get} /api/user/info 用户信息
+ * @apiName 用户信息
+ * @apiGroup 用户
+ * @apiDescription 返回用户详细信息
+ * @apiVersion  1.0.0
+ * 
+ * @apiParam {String} id='' 
+ * 
+ * @apiParamExample  {type} Request-Example:
+ * {
+ *     id: 1
+ * }
+ * 
+ * @apiSuccess {Number} code 200
+ * @apiSuccess {Object} data 用户信息
+ * @apiSuccessExample {type} Response-Example:
+ * {
+ *  code: 200,
+ *  data: {
+ *    name: '',
+ *    age: '',
+ *    sex: '',
+ *    ...
+ *  }
+ * }
+ * 
+ */
 router.get(
   '/article/list',
   expressJoi({

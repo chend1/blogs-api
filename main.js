@@ -8,6 +8,8 @@ app.use(express.urlencoded({ extended: false }))
 
 // 开放静态资源
 app.use('/static', express.static(path.join(__dirname, 'static')))
+// 开放文档
+app.use('/apidoc', express.static(path.join(__dirname, 'apidoc')))
 
 // 解决跨域
 app.use((req, res, next) => {

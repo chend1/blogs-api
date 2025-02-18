@@ -6,6 +6,7 @@ node_modules
 dist-ssr
 apidoc
 *.local
+static
 
 # Editor directories and files
 .vscode/*

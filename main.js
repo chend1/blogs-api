@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3001
 const path = require('path')
 // 参数解析
 app.use(express.json())
@@ -37,8 +37,8 @@ app.use((req, res, next) => {
   next()
 })
 // 开启token验证
-const { useToken } = require('./utils/token')
-app.use(useToken)
+// const { useToken } = require('./utils/token')
+// app.use(useToken)
 
 // 路由导入
 const routers = require('./router')
